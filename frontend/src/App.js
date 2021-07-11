@@ -1,4 +1,6 @@
-function App() {
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const App = () => {
   return (
     <div className="App">
       Hello there
