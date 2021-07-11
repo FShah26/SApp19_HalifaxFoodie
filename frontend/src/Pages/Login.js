@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { AuthenticationDetails, CognitoUser } from "amazon-cognito-identity-js";
 import { Container, Form, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
+import UserPool from "../Utils/UserPool";
+import { getSessionData } from "../Utils/AccountUtils";
 
 const LoginContainer = styled(Container)`
   margin-top: 50px;
@@ -12,9 +15,52 @@ const LoginContainer = styled(Container)`
 
 const Login = () => {
   const [submitError, setsubmitError] = useState(false);
+  const [errMsg, seterrMsg] = useState("");
+  const history = useHistory();
+
+  useEffect(() => {
+    getSessionData().then((data) => {
+      console.log(data);
+      history.push("home");
+    });
+  }, []);
+
+  const setError = (errorMsg) => {
+    setsubmitError(true);
+    seterrMsg(errorMsg);
+  };
 
   const signIn = (e) => {
     e.preventDefault();
+
+    const mailID = e.target.elements.emailAddress.value;
+    const pass = e.target.elements.password.value;
+
+    const user = new CognitoUser({
+      Username: mailID,
+      Pool: UserPool,
+    });
+
+    user.authenticateUser(
+      new AuthenticationDetails({
+        Username: mailID,
+        Password: pass,
+      }),
+      {
+        onSuccess: (d) => {
+          console.log("success: ", d);
+          history.push("/mfa");
+        },
+        onFailure: (e) => {
+          console.error("fail: ", e);
+          setError(e.message);
+        },
+        newPasswordRequired: (d) => {
+          console.log("needNewPass: ", d);
+        },
+      }
+    );
+
     console.log("Submit");
   };
 
@@ -35,9 +81,11 @@ const Login = () => {
         </Form.Group>
 
         <div className="text-center">
-          {submitError && (
-            <p className="text-danger">Invalid email and password</p>
-          )}
+          {submitError && <p className="text-danger">{errMsg}</p>}
+          <p className="text-muted">
+            <strong>Note: </strong>Confirm/Verify the user with given E-mail
+            before login.
+          </p>
           <Button variant="primary" type="submit">
             LOGIN
           </Button>

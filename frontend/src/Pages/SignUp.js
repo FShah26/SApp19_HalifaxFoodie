@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
+import { Redirect, useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import UserPool from "../Utils/UserPool";
 
 const LoginContainer = styled(Container)`
   margin-top: 50px;
@@ -8,9 +10,40 @@ const LoginContainer = styled(Container)`
 
 const Login = () => {
   const [submitError, setsubmitError] = useState(false);
+  const [errMsg, seterrMsg] = useState("");
+  const history = useHistory();
+
+  const setError = (errorMsg) => {
+    setsubmitError(true);
+    seterrMsg(errorMsg);
+  };
 
   const signUp = (e) => {
     e.preventDefault();
+    const email = e.target.elements.emailAddress.value;
+    const pass = e.target.elements.password.value;
+    const repass = e.target.elements.repassword.value;
+    console.log(e.target.elements);
+    console.log(email, pass, repass);
+
+    if (pass !== repass) {
+      setError("Password didn't match");
+      return;
+    }
+
+    if (pass.length < 8) {
+      setError("Password length less than 8");
+      return;
+    }
+
+    UserPool.signUp(email, pass, [], null, (err, data) => {
+      if (err) {
+        setError(err.message);
+      } else {
+        setsubmitError(false);
+        history.push("/login", { signup: true });
+      }
+    });
     console.log("Submit");
   };
 
@@ -29,13 +62,14 @@ const Login = () => {
           <Form.Label>Password</Form.Label>
           <Form.Control placeholder="Password" type="password" />
         </Form.Group>
+
         <Form.Group controlId="repassword">
           <Form.Label>Re-enter Password</Form.Label>
           <Form.Control placeholder="Password" type="password" />
         </Form.Group>
 
         <div className="text-center">
-          {submitError && <p className="text-danger">Sign Up Failed</p>}
+          {submitError && <p className="text-danger">{errMsg}</p>}
           <Button variant="primary" type="submit">
             SIGN UP
           </Button>
