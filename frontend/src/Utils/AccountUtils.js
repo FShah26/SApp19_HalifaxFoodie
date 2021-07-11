@@ -15,3 +15,6 @@ export const getSessionData = async () => {
       : reject();
   });
 };
+
+export const MFA_KEY = "mfa";
+export const EMAIL_KEY = "email";

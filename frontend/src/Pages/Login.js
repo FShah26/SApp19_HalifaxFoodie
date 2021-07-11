@@ -4,7 +4,7 @@ import { Container, Form, Button } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import UserPool from "../Utils/UserPool";
-import { getSessionData } from "../Utils/AccountUtils";
+import { EMAIL_KEY, getSessionData, MFA_KEY } from "../Utils/AccountUtils";
 
 const LoginContainer = styled(Container)`
   margin-top: 50px;
@@ -21,7 +21,8 @@ const Login = () => {
   useEffect(() => {
     getSessionData().then((data) => {
       console.log(data);
-      history.push("home");
+      if (localStorage.getItem(MFA_KEY) === true) history.push("home");
+      else history.push("mfa");
     });
   }, []);
 
@@ -49,6 +50,7 @@ const Login = () => {
       {
         onSuccess: (d) => {
           console.log("success: ", d);
+          localStorage.setItem(EMAIL_KEY, mailID);
           history.push("/mfa");
         },
         onFailure: (e) => {
