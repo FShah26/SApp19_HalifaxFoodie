@@ -34,7 +34,6 @@ const putQuestionsString = (email, questions) => {
   return new Promise((resolve, reject) => {
     sqlCon.query(INSERT_QUERY, [email, questions], (err, res, flds) => {
       if (err) {
-        console.error(err);
         reject(err);
       } else {
         resolve();
@@ -45,7 +44,7 @@ const putQuestionsString = (email, questions) => {
 
 const jsonToString = (qArray) => {
   return new Promise((resolve, reject) => {
-    resString = "";
+    let resString = "";
     qArray.forEach((element) => {
       resString += element.q + " " + element.a + "|";
     });
@@ -82,6 +81,7 @@ const handler = async (event) => {
         response = { success: true };
       })
       .catch((err) => {
+        console.error(err);
         response = { success: false };
       });
   } else {
@@ -99,16 +99,5 @@ const handler = async (event) => {
 
   return response;
 };
-
-handler({
-  email: "testing@gmail.com",
-  questions: [
-    { q: "Hello?", a: "hi!" },
-    { q: "Hello?", a: "hi!" },
-    { q: "Hello?", a: "hi!" },
-  ],
-}).then((data) => {
-  console.log(data);
-});
 
 exports.handler = handler;
