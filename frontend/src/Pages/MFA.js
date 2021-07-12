@@ -25,11 +25,13 @@ const MFAContainer = styled(Container)`
 
 const MFA = () => {
   const history = useHistory();
-  const [userQuestions, setuserQuestions] = useState(null);
+  const [userQuestionsStatus, setuserQuestionsStatus] = useState(null);
+  const [accessToken, setaccessToken] = useState(null);
   let questionData;
 
-  const fetchData = (idToken) => {
+  const fetchQuestionData = (idToken) => {
     const email = localStorage.getItem("email");
+    setaccessToken(idToken.jwtToken);
     axios
       .post(MFA_PATH, JSON.stringify({ email: email }), {
         headers: {
@@ -38,7 +40,10 @@ const MFA = () => {
         },
       })
       .then((res) => {
-        setuserQuestions(res.data.success);
+        if (res.data.success) {
+          questionData = res.data.questions;
+        }
+        setuserQuestionsStatus(res.data.success);
       })
       .catch((e) => {
         console.error(e.message);
@@ -48,7 +53,7 @@ const MFA = () => {
   useEffect(() => {
     getSessionData()
       .then((data) => {
-        fetchData(data.idToken);
+        fetchQuestionData(data.idToken);
       })
       .catch(() => {
         history.push("login");
@@ -63,16 +68,16 @@ const MFA = () => {
       history.push("login");
     }
   };
-  if (userQuestions == null) {
+  if (userQuestionsStatus == null) {
     return (
       <MFAContainer>
         <Spinner animation="border" variant="primary" />
       </MFAContainer>
     );
-  } else if (userQuestions == false) {
+  } else if (userQuestionsStatus == false) {
     return (
       <MFAContainer>
-        <MFAInput logOut={logOut} />
+        <MFAInput logOut={logOut} accessToken={accessToken} />
       </MFAContainer>
     );
   } else {

@@ -1,15 +1,47 @@
 import React, { useState } from "react";
 import { Form, Container, Button, Row, Col } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
+import { MFA_PATH } from "../Utils/URL";
+import { MFA_KEY } from "../Utils/AccountUtils";
 
-const MFAInput = ({ logOut }) => {
+const MFAInput = ({ logOut, accessToken }) => {
   const [submitError, setsubmitError] = useState(false);
   const [errMsg, seterrMsg] = useState("");
+  const history = useHistory();
 
   const mfaSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.elements.a1[0].value);
-    console.log(e.target.elements.a1[1].value);
+    const email = localStorage.getItem("email");
+
+    const body = JSON.stringify({
+      email: email,
+      questions: [
+        { q: e.target.elements.a1[0].value, a: e.target.elements.a1[1].value },
+        { q: e.target.elements.a2[0].value, a: e.target.elements.a2[1].value },
+        { q: e.target.elements.a3[0].value, a: e.target.elements.a3[1].value },
+      ],
+    });
+
+    axios
+      .post(MFA_PATH, body, {
+        headers: {
+          "Content-Type": "application/json",
+          AccessToken: accessToken,
+        },
+      })
+      .then((res) => {
+        if (res.data.success) {
+          localStorage.setItem(MFA_KEY, true);
+          history.push("/home");
+        } else {
+          setsubmitError(true);
+          seterrMsg("MFA Updation failed.");
+        }
+      })
+      .catch((e) => {
+        console.error(e.message);
+      });
   };
 
   return (
