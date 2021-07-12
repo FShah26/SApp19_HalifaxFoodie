@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getSessionData } from "../Utils/AccountUtils";
+import { getSessionData, MFA_KEY } from "../Utils/AccountUtils";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Container, Spinner } from "react-bootstrap";
@@ -8,6 +8,7 @@ import UserPool from "../Utils/UserPool";
 import MFAInput from "../Components/MFAInput";
 import axios from "axios";
 import { MFA_PATH } from "../Utils/URL";
+import MFAValidate from "../Components/MFAValidate";
 
 const MFAContainer = styled(Container)`
   margin-top: 50px;
@@ -27,7 +28,7 @@ const MFA = () => {
   const history = useHistory();
   const [userQuestionsStatus, setuserQuestionsStatus] = useState(null);
   const [accessToken, setaccessToken] = useState(null);
-  let questionData;
+  const [questionData, setquestionData] = useState({});
 
   const fetchQuestionData = (idToken) => {
     const email = localStorage.getItem("email");
@@ -41,7 +42,7 @@ const MFA = () => {
       })
       .then((res) => {
         if (res.data.success) {
-          questionData = res.data.questions;
+          setquestionData(res.data.questions);
         }
         setuserQuestionsStatus(res.data.success);
       })
@@ -64,10 +65,15 @@ const MFA = () => {
     const isUserThere = UserPool.getCurrentUser();
     if (isUserThere) {
       localStorage.removeItem(EMAIL_KEY);
+      localStorage.removeItem(MFA_KEY);
       isUserThere.signOut();
       history.push("login");
     }
   };
+  if (localStorage.getItem(MFA_KEY) === "true") {
+    history.push("/home");
+  }
+
   if (userQuestionsStatus == null) {
     return (
       <MFAContainer>
@@ -81,7 +87,11 @@ const MFA = () => {
       </MFAContainer>
     );
   } else {
-    return <MFAContainer>Have Questions</MFAContainer>;
+    return (
+      <MFAContainer>
+        <MFAValidate logOut={logOut} questions={questionData} />
+      </MFAContainer>
+    );
   }
 };
 

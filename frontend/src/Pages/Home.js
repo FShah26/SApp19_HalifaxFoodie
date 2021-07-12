@@ -13,6 +13,7 @@ const Home = () => {
     const isUserThere = UserPool.getCurrentUser();
     if (isUserThere) {
       localStorage.removeItem(EMAIL_KEY);
+      localStorage.removeItem(MFA_KEY);
       isUserThere.signOut();
       history.push("login");
     }
