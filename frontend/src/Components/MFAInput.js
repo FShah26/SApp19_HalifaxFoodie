@@ -49,6 +49,8 @@ const MFAInput = ({ logOut, accessToken }) => {
       <h1 className="text-center">Halifax Foodie</h1>
 
       <h3 className="text-center text-primary">MFA</h3>
+      <br />
+      <h5 className="text-center">Set your MFA Questions</h5>
       <Form onSubmit={mfaSubmit}>
         <Form.Group controlId="a1">
           <Row>
