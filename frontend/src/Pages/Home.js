@@ -7,6 +7,8 @@ import { EMAIL_KEY, MFA_KEY } from "../Utils/AccountUtils";
 const Home = () => {
   const history = useHistory();
 
+  !localStorage.getItem(MFA_KEY) && history.push("mfa");
+
   const logOut = () => {
     const isUserThere = UserPool.getCurrentUser();
     if (isUserThere) {
@@ -15,8 +17,6 @@ const Home = () => {
       history.push("login");
     }
   };
-
-  !localStorage.getItem(MFA_KEY) && history.push("mfa");
 
   return (
     <div>

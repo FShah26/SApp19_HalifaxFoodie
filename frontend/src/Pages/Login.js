@@ -74,7 +74,7 @@ const Login = () => {
       <Form onSubmit={signIn}>
         <Form.Group controlId="emailAddress">
           <Form.Label>Email</Form.Label>
-          <Form.Control type="emailaddress" placeholder="Email" />
+          <Form.Control type="email" placeholder="Email" />
         </Form.Group>
 
         <Form.Group controlId="password">
