@@ -14,9 +14,11 @@ const MFAInput = ({ logOut, questions }) => {
     e.preventDefault();
 
     if (
-      e.target.elements.a1.value === questions[0].a &&
-      e.target.elements.a2.value === questions[1].a &&
-      e.target.elements.a3.value === questions[2].a
+      e.target.elements.a1.value.toUpperCase() ===
+        questions[0].a.toUpperCase() &&
+      e.target.elements.a2.value.toUpperCase() ===
+        questions[1].a.toUpperCase() &&
+      e.target.elements.a3.value.toUpperCase() === questions[2].a.toUpperCase()
     ) {
       localStorage.setItem(MFA_KEY, true);
       setsubmitError(false);
