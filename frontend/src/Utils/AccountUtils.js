@@ -18,3 +18,6 @@ export const getSessionData = async () => {
 
 export const MFA_KEY = "mfa";
 export const EMAIL_KEY = "email";
+export const PROFILE_KEY = "profile";
+export const RESTRAUNT_PROFILE = "restraunt";
+export const USER_PROFILE = "user";

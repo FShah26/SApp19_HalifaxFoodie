@@ -3,6 +3,7 @@ import { Container, Form, Button } from "react-bootstrap";
 import { Redirect, useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import UserPool from "../Utils/UserPool";
+import * as AmazonCognitoIdentity from "amazon-cognito-identity-js";
 
 const LoginContainer = styled(Container)`
   margin-top: 50px;
@@ -36,7 +37,12 @@ const Login = () => {
       return;
     }
 
-    UserPool.signUp(email, pass, [], null, (err, data) => {
+    var attributeRole = new AmazonCognitoIdentity.CognitoUserAttribute({
+      Name: "profile",
+      Value: "user",
+    });
+
+    UserPool.signUp(email, pass, [attributeRole], null, (err, data) => {
       if (err) {
         setError(err.message);
       } else {

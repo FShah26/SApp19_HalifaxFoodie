@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { getSessionData, MFA_KEY } from "../Utils/AccountUtils";
+import {
+  getSessionData,
+  MFA_KEY,
+  PROFILE_KEY,
+  RESTRAUNT_PROFILE,
+  USER_PROFILE,
+} from "../Utils/AccountUtils";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Container, Spinner } from "react-bootstrap";
@@ -9,6 +15,7 @@ import MFAInput from "../Components/MFAInput";
 import axios from "axios";
 import { MFA_PATH } from "../Utils/URL";
 import MFAValidate from "../Components/MFAValidate";
+import { useJwt, decodeToken } from "react-jwt";
 
 const MFAContainer = styled(Container)`
   margin-top: 50px;
@@ -32,12 +39,12 @@ const MFA = () => {
 
   const fetchQuestionData = (idToken) => {
     const email = localStorage.getItem("email");
-    setaccessToken(idToken.jwtToken);
+    setaccessToken(idToken);
     axios
       .post(MFA_PATH, JSON.stringify({ email: email }), {
         headers: {
           "Content-Type": "application/json",
-          AccessToken: idToken.jwtToken,
+          AccessToken: idToken,
         },
       })
       .then((res) => {
@@ -54,7 +61,9 @@ const MFA = () => {
   useEffect(() => {
     getSessionData()
       .then((data) => {
-        fetchQuestionData(data.idToken);
+        const profile = decodeToken(data.idToken.jwtToken).profile;
+        localStorage.setItem(PROFILE_KEY, profile);
+        fetchQuestionData(data.idToken.jwtToken);
       })
       .catch(() => {
         history.push("login");
