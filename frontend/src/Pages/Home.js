@@ -2,7 +2,12 @@ import React from "react";
 import UserPool from "../Utils/UserPool";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import { EMAIL_KEY, MFA_KEY } from "../Utils/AccountUtils";
+import {
+  EMAIL_KEY,
+  MFA_KEY,
+  PROFILE_KEY,
+  USER_PROFILE,
+} from "../Utils/AccountUtils";
 import styled from "styled-components";
 import RestaurantsListing from "../Components/RestaurantsListing";
 import { restaurantList } from "../Utils/TestData";
@@ -16,6 +21,7 @@ const HomePageContainer = styled(Container)`
 
 const Home = () => {
   const history = useHistory();
+  const profile = localStorage.getItem(PROFILE_KEY);
 
   !localStorage.getItem(MFA_KEY) && history.push("mfa");
 
@@ -41,9 +47,13 @@ const Home = () => {
           </Button>
         </Col>
       </Row>
-      <row>
-        <RestaurantsListing restaurantList={restaurantList} />
-      </row>
+      {profile === USER_PROFILE ? (
+        <row>
+          <RestaurantsListing restaurantList={restaurantList} />
+        </row>
+      ) : (
+        "Load Restaurant Owner Content Here"
+      )}
     </HomePageContainer>
   );
 };

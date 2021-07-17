@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Container, Col, Row, Spinner, Button } from "react-bootstrap";
+import { Container, Col, Row, Spinner } from "react-bootstrap";
 import RestaurantCard from "./RestaurantCard";
 
 const RestaurantListingContainer = styled(Container)`
