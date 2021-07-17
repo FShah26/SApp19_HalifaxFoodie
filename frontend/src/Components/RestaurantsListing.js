@@ -14,6 +14,7 @@ const RestaurantsListing = ({ restaurantList }) => {
         {restaurantList.map((restaurant) => (
           <Col>
             <RestaurantCard
+              id={restaurant.id}
               title={restaurant.title}
               description={restaurant.description}
               imageURL={restaurant.imageURL}

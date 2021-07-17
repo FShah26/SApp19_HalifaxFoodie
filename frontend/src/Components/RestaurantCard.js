@@ -9,14 +9,19 @@ const StyledCard = styled(Card)`
   margin: 10px 5px;
 `;
 
-const RestaurantCard = ({ title, imageURL, description }) => {
+const RestaurantCard = ({ title, imageURL, description, id }) => {
+  const cardClick = (e) => {
+    console.log(id);
+  };
   return (
     <StyledCard>
       <Card.Img variant="top" src={imageURL} />
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text className="text-muted">{description}</Card.Text>
-        <Button variant="outline-primary">View menu</Button>
+        <Button variant="outline-primary" onClick={cardClick}>
+          View menu
+        </Button>
       </Card.Body>
     </StyledCard>
   );
