@@ -47,13 +47,13 @@ const Home = () => {
           </Button>
         </Col>
       </Row>
-      {profile === USER_PROFILE ? (
-        <row>
+      <Row>
+        {profile === USER_PROFILE ? (
           <RestaurantsListing restaurantList={restaurantList} />
-        </row>
-      ) : (
-        "Load Restaurant Owner Content Here"
-      )}
+        ) : (
+          "Load Restaurant Owner Content Here"
+        )}
+      </Row>
     </HomePageContainer>
   );
 };
