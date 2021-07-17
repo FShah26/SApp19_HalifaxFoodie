@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import UserPool from "../Utils/UserPool";
 import { Button, Container } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
