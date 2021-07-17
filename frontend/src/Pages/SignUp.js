@@ -3,6 +3,7 @@ import { Container, Form, Button } from "react-bootstrap";
 import { Redirect, useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import UserPool from "../Utils/UserPool";
+import * as AmazonCognitoIdentity from "amazon-cognito-identity-js";
 
 const LoginContainer = styled(Container)`
   margin-top: 50px;
@@ -23,8 +24,7 @@ const Login = () => {
     const email = e.target.elements.emailAddress.value;
     const pass = e.target.elements.password.value;
     const repass = e.target.elements.repassword.value;
-    console.log(e.target.elements);
-    console.log(email, pass, repass);
+    const accountType = e.target.elements.userselect.value;
 
     if (pass !== repass) {
       setError("Password didn't match");
@@ -36,7 +36,12 @@ const Login = () => {
       return;
     }
 
-    UserPool.signUp(email, pass, [], null, (err, data) => {
+    var attributeRole = new AmazonCognitoIdentity.CognitoUserAttribute({
+      Name: "profile",
+      Value: accountType,
+    });
+
+    UserPool.signUp(email, pass, [attributeRole], null, (err, data) => {
       if (err) {
         setError(err.message);
       } else {
@@ -66,6 +71,15 @@ const Login = () => {
         <Form.Group controlId="repassword">
           <Form.Label>Re-enter Password</Form.Label>
           <Form.Control placeholder="Password" type="password" />
+        </Form.Group>
+
+        <Form.Group controlId="userselect">
+          <Form.Label>Account Type</Form.Label>
+
+          <Form.Control as="select" size="md" custom>
+            <option value="user">User</option>
+            <option value="restraunt">Restraunt</option>
+          </Form.Control>
         </Form.Group>
 
         <div className="text-center">
