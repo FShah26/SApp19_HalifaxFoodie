@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import UserPool from "../Utils/UserPool";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { EMAIL_KEY, MFA_KEY } from "../Utils/AccountUtils";
 
@@ -20,9 +20,11 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <Button onClick={logOut}>Log Out</Button>
-    </div>
+    <Container>
+      <Button variant="secondary" onClick={logOut}>
+        Log Out
+      </Button>
+    </Container>
   );
 };
 

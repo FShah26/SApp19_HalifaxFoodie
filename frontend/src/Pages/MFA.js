@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  getSessionData,
-  MFA_KEY,
-  PROFILE_KEY,
-  RESTRAUNT_PROFILE,
-  USER_PROFILE,
-} from "../Utils/AccountUtils";
+import { getSessionData, MFA_KEY, PROFILE_KEY } from "../Utils/AccountUtils";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Container, Spinner } from "react-bootstrap";
@@ -15,7 +9,7 @@ import MFAInput from "../Components/MFAInput";
 import axios from "axios";
 import { MFA_PATH } from "../Utils/URL";
 import MFAValidate from "../Components/MFAValidate";
-import { useJwt, decodeToken } from "react-jwt";
+import { decodeToken } from "react-jwt";
 
 const MFAContainer = styled(Container)`
   margin-top: 50px;

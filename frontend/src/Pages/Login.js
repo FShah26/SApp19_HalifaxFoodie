@@ -4,12 +4,7 @@ import { Container, Form, Button } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import UserPool from "../Utils/UserPool";
-import {
-  EMAIL_KEY,
-  getSessionData,
-  MFA_KEY,
-  PROFILE_KEY,
-} from "../Utils/AccountUtils";
+import { EMAIL_KEY, getSessionData, MFA_KEY } from "../Utils/AccountUtils";
 
 const LoginContainer = styled(Container)`
   margin-top: 50px;
