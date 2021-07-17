@@ -41,7 +41,7 @@ const Home = () => {
         </Col>
       </Row>
       <row>
-        <RestaurantsListing />
+        <RestaurantsListing restaurantList={[]} />
       </row>
     </HomePageContainer>
   );
