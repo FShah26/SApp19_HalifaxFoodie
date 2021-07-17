@@ -46,7 +46,7 @@ const jsonToString = (qArray) => {
   return new Promise((resolve, reject) => {
     let resString = "";
     qArray.forEach((element) => {
-      resString += element.q + " " + element.a + "|";
+      resString += element.q + ";" + element.a + "|";
     });
     resolve(resString);
   });
@@ -57,7 +57,7 @@ const stringToJSON = (questionString) => {
   let resArr = [];
 
   for (let i = 0; i < 3; i++) {
-    const [question, answer] = eachQuestions[i].split(" ");
+    const [question, answer] = eachQuestions[i].split(";");
     resArr.push({ q: question, a: answer });
   }
   console.log(resArr);
@@ -82,7 +82,7 @@ const handler = async (event) => {
       })
       .catch((err) => {
         console.error(err);
-        response = { success: false };
+        response = { success: false, message: err.message };
       });
   } else {
     await getQuestionsString(event.email)
