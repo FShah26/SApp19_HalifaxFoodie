@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { EMAIL_KEY, MFA_KEY } from "../Utils/AccountUtils";
 import styled from "styled-components";
 import RestaurantsListing from "../Components/RestaurantsListing";
+import { restaurantList } from "../Utils/TestData";
 
 const HomePageContainer = styled(Container)`
   margin-top: 50px;
@@ -31,17 +32,17 @@ const Home = () => {
   return (
     <HomePageContainer>
       <Row>
-        <Col xs="12" md="10">
+        <Col xs="8" md="10">
           <h1 className="text-muted"> Home </h1>
         </Col>
-        <Col xs="12" md="2">
+        <Col xs="4" md="2">
           <Button variant="danger" onClick={logOut}>
             Log Out
           </Button>
         </Col>
       </Row>
       <row>
-        <RestaurantsListing restaurantList={[]} />
+        <RestaurantsListing restaurantList={restaurantList} />
       </row>
     </HomePageContainer>
   );

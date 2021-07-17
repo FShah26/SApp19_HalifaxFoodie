@@ -10,7 +10,7 @@ const RestaurantListingContainer = styled(Container)`
 const RestaurantsListing = ({ restaurantList }) => {
   return restaurantList.length > 0 ? (
     <RestaurantListingContainer>
-      <Row md={4} sm={3} xs={1}>
+      <Row md={4} sm={2} xs={1}>
         {restaurantList.map((restaurant) => (
           <Col>
             <RestaurantCard
