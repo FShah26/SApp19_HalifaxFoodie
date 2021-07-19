@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { Form, Container, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Col } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
-import axios from "axios";
-import { MFA_PATH } from "../Utils/URL";
 import { MFA_KEY } from "../Utils/AccountUtils";
 
 const MFAInput = ({ logOut, questions }) => {

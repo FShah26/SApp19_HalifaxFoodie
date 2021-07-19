@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
   getSessionData,
+  ID_TOKEN,
   MFA_KEY,
   PROFILE_KEY,
-  RESTRAUNT_PROFILE,
-  USER_PROFILE,
 } from "../Utils/AccountUtils";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -13,9 +12,9 @@ import { EMAIL_KEY } from "../Utils/AccountUtils";
 import UserPool from "../Utils/UserPool";
 import MFAInput from "../Components/MFAInput";
 import axios from "axios";
-import { MFA_PATH } from "../Utils/URL";
+import { MFA_PATH } from "../Utils/Routes";
 import MFAValidate from "../Components/MFAValidate";
-import { useJwt, decodeToken } from "react-jwt";
+import { decodeToken } from "react-jwt";
 
 const MFAContainer = styled(Container)`
   margin-top: 50px;
@@ -40,6 +39,7 @@ const MFA = () => {
   const fetchQuestionData = (idToken) => {
     const email = localStorage.getItem("email");
     setaccessToken(idToken);
+    localStorage.setItem(ID_TOKEN, idToken);
     axios
       .post(MFA_PATH, JSON.stringify({ email: email }), {
         headers: {

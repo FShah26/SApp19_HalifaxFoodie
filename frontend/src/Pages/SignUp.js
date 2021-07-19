@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { Redirect, useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import UserPool from "../Utils/UserPool";
 import * as AmazonCognitoIdentity from "amazon-cognito-identity-js";
