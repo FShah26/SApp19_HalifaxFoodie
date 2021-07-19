@@ -1,9 +1,9 @@
 var SQL = require("mysql2");
 
 const sqlCon = SQL.createConnection({
-  host: "35.238.151.206",
-  user: "root",
-  password: "123098",
+  host: "fooddelivery5410.cy8c8vgerfgo.us-east-1.rds.amazonaws.com",
+  user: "admin",
+  password: "password1234",
   database: "mfa",
 });
 
@@ -100,4 +100,5 @@ const handler = async (event) => {
   return response;
 };
 
+handler({ email: "hashikdonthineni@gmail.com" });
 exports.handler = handler;
