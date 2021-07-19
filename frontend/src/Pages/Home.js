@@ -10,7 +10,6 @@ import {
 } from "../Utils/AccountUtils";
 import styled from "styled-components";
 import RestaurantsListing from "../Components/RestaurantsListing";
-import { restaurantList } from "../Utils/TestData";
 
 const HomePageContainer = styled(Container)`
   margin-top: 50px;
@@ -49,7 +48,7 @@ const Home = () => {
       </Row>
       <Row>
         {profile === USER_PROFILE ? (
-          <RestaurantsListing restaurantList={restaurantList} />
+          <RestaurantsListing />
         ) : (
           "Load Restaurant Owner Content Here"
         )}
