@@ -100,5 +100,4 @@ const handler = async (event) => {
   return response;
 };
 
-handler({ email: "hashikdonthineni@gmail.com" });
 exports.handler = handler;
