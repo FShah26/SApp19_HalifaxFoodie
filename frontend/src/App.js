@@ -11,8 +11,9 @@ import SignUp from "./Pages/SignUp";
 import { GlobalStyle } from "./GlobalStyles.styled";
 import Home from "./Pages/Home";
 import MFA from "./Pages/MFA";
-import RestaurantHome from "./Restaurant/pages/Home"
-import RestaurantMenu from "./Restaurant/pages/Menu"
+import RestaurantHome from "./Restaurant/pages/Home";
+import RestaurantMenu from "./Restaurant/pages/Menu";
+import Restaurant from "./Pages/Restaurant";
 
 const App = () => {
   return (
@@ -33,14 +34,17 @@ const App = () => {
         <Route exact path="/home">
           <Home />
         </Route>
+        <Route exact path="/restaurant/:id">
+          <Restaurant />
+        </Route>
         <Route exact path="/">
           <Redirect to="login" />
         </Route>
         <Route exact path="/restaurantHome">
-          <RestaurantHome/>
+          <RestaurantHome />
         </Route>
         <Route exact path="/restaurantMenu">
-          <RestaurantMenu/>
+          <RestaurantMenu />
         </Route>
       </Router>
     </React.Fragment>

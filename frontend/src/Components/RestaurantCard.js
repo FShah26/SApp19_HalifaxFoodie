@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
+import { Redirect, useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledCard = styled(Card)`
@@ -10,9 +11,12 @@ const StyledCard = styled(Card)`
 `;
 
 const RestaurantCard = ({ title, imageURL, description, id }) => {
-  const cardClick = (e) => {
-    console.log(id);
+  const history = useHistory();
+
+  const cardClick = () => {
+    history.push(`restaurant/${id}`);
   };
+
   return (
     <StyledCard>
       <Card.Img variant="top" src={imageURL} />
