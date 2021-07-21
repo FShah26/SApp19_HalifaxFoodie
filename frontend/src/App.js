@@ -14,6 +14,7 @@ import MFA from "./Pages/MFA";
 import RestaurantHome from "./Restaurant/pages/Home";
 import RestaurantMenu from "./Restaurant/pages/Menu";
 import Restaurant from "./Pages/Restaurant";
+import MenuItem from "./Restaurant/pages/menuItem";
 
 const App = () => {
   return (
@@ -45,6 +46,9 @@ const App = () => {
         </Route>
         <Route exact path="/restaurantMenu">
           <RestaurantMenu />
+        </Route>
+        <Route exact path="/menuItem/:id">
+          <MenuItem/>
         </Route>
       </Router>
     </React.Fragment>
