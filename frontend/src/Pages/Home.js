@@ -10,6 +10,7 @@ import {
 } from "../Utils/AccountUtils";
 import styled from "styled-components";
 import RestaurantsListing from "../Components/RestaurantsListing";
+import RestaurantHome from "../Restaurant/pages/Home";
 
 const HomePageContainer = styled(Container)`
   margin-top: 50px;
@@ -35,25 +36,27 @@ const Home = () => {
   };
 
   return (
-    <HomePageContainer>
-      <Row>
-        <Col xs="8" md="10">
-          <h1 className="text-muted"> Home </h1>
-        </Col>
-        <Col xs="4" md="2">
-          <Button variant="danger" onClick={logOut}>
-            Log Out
-          </Button>
-        </Col>
-      </Row>
-      <Row>
-        {profile === USER_PROFILE ? (
-          <RestaurantsListing />
+    <>
+      {profile === USER_PROFILE ? (
+        <HomePageContainer>
+          <Row>
+          <Col xs="8" md="10">
+            <h1 className="text-muted"> Home </h1>
+          </Col>
+          <Col xs="4" md="2">
+            <Button variant="danger" onClick={logOut}>
+              Log Out
+            </Button>
+          </Col>
+        </Row>
+        <Row>
+            <RestaurantsListing />
+        </Row>
+        </HomePageContainer>
         ) : (
-          "Load Restaurant Owner Content Here"
+          <RestaurantHome/>
         )}
-      </Row>
-    </HomePageContainer>
+        </>
   );
 };
 
