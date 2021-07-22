@@ -13,10 +13,7 @@ const Menu = () => {
   const [restaurantId,setRestaurantId] = useState(1);
   const history = useHistory();
   
-  const [isLoading,setIsLoading] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [isLoading,setIsLoading] = useState(true);
 
 
   useEffect(() => {
@@ -41,7 +38,12 @@ const Menu = () => {
   }
 
   function addMenuItem() {
-    alert("AddItem called");
+    let item = {name:"",Id:0,ingredients:"",price:0,restaurantId:restaurantId} 
+    console.log(item);
+    history.push({
+      pathname:'/menuItem/Add',
+      state: {menuItem:item,isEdit:false }
+    });
   }
 
   function editMenuItem(id) {
@@ -82,7 +84,7 @@ const Menu = () => {
           
           {/* <PencilSquare style={{ marginLeft: '.5rem' }} size={20}/> */}
         </div>
-        <Spinner animation="border" size="lg" style={{display:'flex',justifyContent:'flex-center', visibility:isLoading ? 'visibile' : 'collapse' }} />
+        <Spinner animation="border" size="lg" style={{display:'flex',justifyContent:'flex-center', visibility:(isLoading ? "visibile" : "collapse") }} />
       { menuItems.map((r)=>{
             return(
                 <div  className="col-3 m-1 picture-card" key={r.Id} >

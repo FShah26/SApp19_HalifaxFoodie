@@ -23,22 +23,43 @@ const MenuItem = (props) => {
     setIsEdit(location.state.isEdit);
   }, []);
 
+  async function saveAddedItem()
+  {
+    setIsLoading(true);
+    console.log(menuItem);
+    await axios({
+      method:"post",
+      url:"https://olwcwrho8c.execute-api.us-east-1.amazonaws.com/PROD",
+      data:{
+        'restaurantId':menuItem.restaurantId,
+        'name':menuItem.name,
+        'price':menuItem.price,
+        'ingredients':menuItem.ingredients
+      }
+    }).then((response)=>{
+      alert(response.data.message);
+      setIsLoading(false);
+    }).catch((error)=>{
+      alert(error);
+      setIsLoading(false);
+    });
+  }
+
   async function saveEditedItem()
   {
     setIsLoading(true);
+    console.log(menuItem);
     await axios({
       method:"put",
-      url:" https://olwcwrho8c.execute-api.us-east-1.amazonaws.com/PROD",
+      url:"https://olwcwrho8c.execute-api.us-east-1.amazonaws.com/PROD",
       params:{'Id':menuItem.Id},
-      body:{
+      data:{
         'name':menuItem.name,
         'price':menuItem.price,
         'ingredients':menuItem.ingredients,
       }
     }).then((response)=>{
       alert(response.data.message);
-      // console.log(response.data.data);
-      // fetchMenuItems();
       setIsLoading(false);
     }).catch((error)=>{
       alert(error);
@@ -53,7 +74,10 @@ const MenuItem = (props) => {
       history.push("/restaurantMenu")
     }
     else
-    {}
+    {
+      saveAddedItem();
+      history.push("/restaurantMenu");
+    }
         
   }
 
@@ -77,11 +101,11 @@ const MenuItem = (props) => {
                 <form>
                     <div className="form-group">
                         <label htmlFor="firstName">Name</label>
-                        <input className="form-control" placeholder="*Name"  type="text" id="name" name="name" value={menuItem.name} onChange={handleChange}  /><br/>
+                        <input className="form-control" placeholder="*Name"  type="text" id="name" name="name" value={String(menuItem.name)} onChange={handleChange}  /><br/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="lastName">Ingredient (add comma separated values)</label>
-                        <input className="form-control" placeholder="*Ingredients" type="text" id="ingredients" name="ingredients" value={menuItem.ingredients} onChange={handleChange} /><br/>
+                        <input className="form-control" placeholder="*Ingredients" type="text" id="ingredients" name="ingredients" value={String(menuItem.ingredients)} onChange={handleChange} /><br/>
                     </div>
                     <div className="form-group">  
                         <label htmlFor="email">Price</label>
