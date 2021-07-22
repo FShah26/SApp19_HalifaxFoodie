@@ -6,6 +6,9 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
+import {
+  PROFILE_KEY
+} from "./Utils/AccountUtils";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import { GlobalStyle } from "./GlobalStyles.styled";
@@ -15,8 +18,12 @@ import RestaurantHome from "./Restaurant/pages/Home";
 import RestaurantMenu from "./Restaurant/pages/Menu";
 import Restaurant from "./Pages/Restaurant";
 import MenuItem from "./Restaurant/pages/menuItem";
+import Chat from "./Restaurant/pages/Chat";
 
 const App = () => {
+
+  
+  const profile = localStorage.getItem(PROFILE_KEY);
   return (
     <React.Fragment>
       <GlobalStyle />
@@ -49,6 +56,9 @@ const App = () => {
         </Route>
         <Route exact path="/menuItem/:id">
           <MenuItem/>
+        </Route>
+        <Route exact path="/chat">
+          <Chat role={profile}/>
         </Route>
       </Router>
     </React.Fragment>
