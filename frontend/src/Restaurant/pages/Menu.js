@@ -15,8 +15,6 @@ const Menu = () => {
   
   const [isLoading,setIsLoading] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
 
   useEffect(() => {
