@@ -17,7 +17,7 @@ const Chat = () => {
     const [user,setuser] = useState(location.state.userName);
     const [restaurantName,setRestaurantname] = useState(location.state.restaurantName);
     const [userPublisherTopic,setUserPublisherTopic] = useState('');
-    const [restaurantPublisherTopic,setRestaurantPublishedTopic] = useState('');
+    const [restaurantPublisherTopic,setRestaurantPublisherTopic] = useState('');
     
 
     const scrollToBottom = () => {
@@ -34,8 +34,8 @@ const Chat = () => {
         if(isOnline)
         {
             
-            setUserPublisherTopic(userName + "-" + restaurantName + "-" + "Publisher")
-            setRestaurantPublisherTopic(restaurantName  + "-" + userName + "-" + "Publisher")
+            setUserPublisherTopic(user + "-" + restaurantName + "-" + "Publisher")
+            setRestaurantPublisherTopic(restaurantName  + "-" + user + "-" + "Publisher")
             setTimerId(setInterval(() => {
                 console.log('Someone Scheduled me to run every second');
                 //create a rest-user-publisher
