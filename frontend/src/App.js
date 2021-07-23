@@ -19,6 +19,7 @@ import RestaurantMenu from "./Restaurant/pages/Menu";
 import Restaurant from "./Pages/Restaurant";
 import MenuItem from "./Restaurant/pages/menuItem";
 import Chat from "./Restaurant/pages/Chat";
+import OrderFood from "./Pages/OrderFood";
 
 const App = () => {
 
@@ -44,6 +45,9 @@ const App = () => {
         </Route>
         <Route exact path="/restaurant/:id">
           <Restaurant />
+        </Route>
+        <Route exact path="/orderFood">
+          <OrderFood />
         </Route>
         <Route exact path="/">
           <Redirect to="login" />
