@@ -35,6 +35,7 @@ function AppNavBar() {
                     <Nav.Link href="/restaurantMenu">Menu</Nav.Link>
                     <Nav.Link href="/promocodes">Promocodes</Nav.Link>
                     <Nav.Link href="/recipes">Recipe</Nav.Link>
+                    <Nav.Link href="/chat">Get Online</Nav.Link>
                     <Nav.Link eventKey={2} href="#" onClick={logOut} className="ml-auto">Logout</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
