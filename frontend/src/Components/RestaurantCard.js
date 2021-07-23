@@ -1,8 +1,8 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button,OverlayTrigger,Tooltip } from "react-bootstrap";
 import { Redirect, useHistory } from "react-router-dom";
 import styled from "styled-components";
-
+import { ChatLeftDotsFill } from "react-bootstrap-icons";
 const StyledCard = styled(Card)`
   width: auto;
   height: auto;
@@ -10,12 +10,14 @@ const StyledCard = styled(Card)`
   margin: 10px 5px;
 `;
 
-const RestaurantCard = ({ title, imageURL, description, id }) => {
+const RestaurantCard = ({ title, imageURL, description, id,contactRestaurant }) => {
   const history = useHistory();
 
   const cardClick = () => {
     history.push(`restaurant/${id}`);
   };
+
+  
 
   return (
     <StyledCard>
@@ -26,6 +28,18 @@ const RestaurantCard = ({ title, imageURL, description, id }) => {
         <Button variant="outline-primary" onClick={cardClick}>
           View menu
         </Button>
+        <a onClick={()=> {contactRestaurant(title)}}>
+          <OverlayTrigger 
+            key={id}
+            placement='top'
+            overlay={
+            <Tooltip id={id}>
+              Contact Restaurant
+            </Tooltip>
+          }>
+            <ChatLeftDotsFill size={30} />
+          </OverlayTrigger>
+        </a>
       </Card.Body>
     </StyledCard>
   );
