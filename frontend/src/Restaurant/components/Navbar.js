@@ -1,3 +1,4 @@
+import React,{useState} from 'react';
 import {Navbar,Nav} from 'react-bootstrap';
 import UserPool from "../../Utils/UserPool";
 import { useHistory } from "react-router-dom";
@@ -11,6 +12,9 @@ import {
 function AppNavBar() {
   
   const history = useHistory();
+  const profile = localStorage.getItem(PROFILE_KEY);
+  const userName = localStorage.getItem(EMAIL_KEY);
+  const [restaurantName,setRestaurantname] = useState('testRestaurant');
 
   const logOut = () => {
     const isUserThere = UserPool.getCurrentUser();
@@ -20,6 +24,16 @@ function AppNavBar() {
       isUserThere.signOut();
       history.push("login");
     }
+  };
+
+  const initiateChat = () => {
+    // console.log("User",userName)
+    // console.log("Restaurant",restaurantName)
+    history.push({
+      pathname:'/chat',
+      state: {role:profile,restaurantName:restaurantName,userName:userName }
+    });
+
   };
 
   return (
@@ -35,7 +49,7 @@ function AppNavBar() {
                     <Nav.Link href="/restaurantMenu">Menu</Nav.Link>
                     <Nav.Link href="/promocodes">Promocodes</Nav.Link>
                     <Nav.Link href="/recipes">Recipe</Nav.Link>
-                    <Nav.Link href="/chat">Get Online</Nav.Link>
+                    <Nav.Link href="#" onClick={initiateChat}>Get Online</Nav.Link>
                     <Nav.Link eventKey={2} href="#" onClick={logOut} className="ml-auto">Logout</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
