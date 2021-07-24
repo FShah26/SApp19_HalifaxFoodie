@@ -23,6 +23,7 @@ import MenuItem from "./Restaurant/pages/menuItem";
 import Chat from "./Restaurant/pages/Chat";
 import OrderFood from "./Pages/OrderFood";
 import axios from 'axios';
+import WordCloud from "./Restaurant/components/WordCloud";
 const App = () => {
 
   
@@ -95,6 +96,9 @@ const App = () => {
         </Route>
         <Route exact path="/chat">
           <Chat role={profile}/>
+        </Route>
+        <Route exact path="/wordcloud/:menuItemId">
+          <WordCloud />
         </Route>
       </Router>
     </React.Fragment>
