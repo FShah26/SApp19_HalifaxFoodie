@@ -30,7 +30,7 @@ const Feedback = (props) => {
     event.preventDefault();
     console.log("ff");
 
-    const url = "http://localhost:2100/api/orders/feedback";
+    const url = "https://jg3re3ezm8.execute-api.us-east-1.amazonaws.com/api/feedback";
 
     axios
       .post(url, feedbackData)
