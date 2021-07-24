@@ -35,7 +35,7 @@ const Chat = () => {
         {
             
             setUserPublisherTopic(user + "-" + restaurantName + "-" + "Publisher")
-            setRestaurantPublisherTopic(restaurantName  + "-" + user + "-" + "Publisher")
+            // setRestaurantPublisherTopic(restaurantName  + "-" + user + "-" + "Publisher")`
             setTimerId(setInterval(() => {
                 console.log('Someone Scheduled me to run every second');
                 //create a rest-user-publisher

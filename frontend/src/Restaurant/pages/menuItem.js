@@ -8,7 +8,7 @@ import axios from 'axios';
 // import {Card,Button} from 'react-bootstrap';
 // import { PlusSquareFill,PencilSquare,TrashFill } from 'react-bootstrap-icons';
 
-const MenuItem = (props) => {
+const MenuItem = (props,{restaurantDetails}) => {
 
     const location = useLocation();
     const [menuItem,setMenuItem] = useState([]);
@@ -93,7 +93,7 @@ const MenuItem = (props) => {
 
   return (
     <div>
-      <Navbar></Navbar>
+      {/* <Navbar restaurantDetails={restaurantDetails}></Navbar> */}
       <div className="outer">      
       <div className="inner">
                 <div>

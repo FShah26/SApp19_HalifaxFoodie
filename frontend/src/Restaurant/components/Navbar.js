@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import {Navbar,Nav} from 'react-bootstrap';
 import UserPool from "../../Utils/UserPool";
-import { useHistory } from "react-router-dom";
+import { useHistory,Link } from "react-router-dom";
 import {
   EMAIL_KEY,
   MFA_KEY,
@@ -9,12 +9,11 @@ import {
   USER_PROFILE,
 } from "../../Utils/AccountUtils";
 
-function AppNavBar() {
+function AppNavBar({restaurantDetails}) {
   
   const history = useHistory();
   const profile = localStorage.getItem(PROFILE_KEY);
   const userName = localStorage.getItem(EMAIL_KEY);
-  const [restaurantName,setRestaurantname] = useState('testRestaurant');
 
   const logOut = () => {
     const isUserThere = UserPool.getCurrentUser();
@@ -31,22 +30,26 @@ function AppNavBar() {
     // console.log("Restaurant",restaurantName)
     history.push({
       pathname:'/chat',
-      state: {role:profile,restaurantName:restaurantName,userName:userName }
+      state: {role:profile,restaurantName:userName,userName:"" }
     });
-
   };
+
 
   return (
     <div className="App">
       <Navbar collapseOnSelect expand="lg" bg="dark"  variant="dark">
             <Navbar.Brand href="/restaurantHome">
                 {/* <img src={logo} className="d-inline-block align-top" height="150"/> */}
-                RestaurantName <sub>HalifaxFoodie</sub>
+                {restaurantDetails.resname} <sub>HalifaxFoodie</sub>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="container-fluid">
-                    <Nav.Link href="/restaurantMenu">Menu</Nav.Link>
+                    <Nav.Link as={Link} to={{
+                      pathname:"/restaurantMenu",
+                      state:{restaurantDetails:restaurantDetails},
+                    }} 
+                    >Menu</Nav.Link>
                     <Nav.Link href="/promocodes">Promocodes</Nav.Link>
                     <Nav.Link href="/recipes">Recipe</Nav.Link>
                     <Nav.Link href="#" onClick={initiateChat}>Get Online</Nav.Link>
