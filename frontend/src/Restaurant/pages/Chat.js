@@ -3,7 +3,7 @@ import { Form,Row,Col,Button } from 'react-bootstrap';
 import { ArrowRightSquareFill } from 'react-bootstrap-icons';
 import { useHistory,useLocation } from "react-router-dom";
 import '../css/Chat.css';
-
+import axios from 'axios';
 const Chat = () => {
 
     const location = useLocation();
