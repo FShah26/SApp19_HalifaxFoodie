@@ -26,11 +26,11 @@ function AppNavBar({restaurantDetails}) {
   };
 
   const initiateChat = () => {
-    // console.log("User",userName)
+    // console.log("RestinNAV",userName)
     // console.log("Restaurant",restaurantName)
     history.push({
       pathname:'/chat',
-      state: {role:profile,restaurantName:userName,userName:"" }
+      state: {role:profile,restaurantName:restaurantDetails.resname,userName:"" }
     });
   };
 

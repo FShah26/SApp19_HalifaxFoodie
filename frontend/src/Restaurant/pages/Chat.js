@@ -25,6 +25,15 @@ const Chat = () => {
       }
 
     useEffect(() => {
+        // if(role === "user")
+        // {
+        //     console.log("User:",user);
+        //     console.log("RestaurantToContact",restaurantName)
+        // }
+        // else
+        // {
+        //     console.log("Restaurant:",restaurantName);
+        // }
         scrollToBottom();
         ToggleAvailability();
     }, [conversation,isOnline]);
@@ -35,12 +44,13 @@ const Chat = () => {
         {
             
             setUserPublisherTopic(user + "-" + restaurantName + "-" + "Publisher")
+            // https://3resyr4ypg.execute-api.us-east-1.amazonaws.com/PROD
             // setRestaurantPublisherTopic(restaurantName  + "-" + user + "-" + "Publisher")`
             setTimerId(setInterval(() => {
                 console.log('Someone Scheduled me to run every second');
                 //create a rest-user-publisher
                 //call the getAPI(PullMessage) of the user-rest-publisher in case of restaurant
-              }, 1000)); 
+              }, 10000)); 
         }
         else
         {
@@ -54,6 +64,43 @@ const Chat = () => {
                 history.push("/restaurantHome");
             }
         }
+    }
+
+    async function createTopic(topicName){
+          await axios({
+            method:"get",
+            url:"https://3resyr4ypg.execute-api.us-east-1.amazonaws.com/PROD/chatting",
+            params:{'topicName':topicName}
+          }).then((response)=>{
+          }).catch((error)=>{
+            alert(error);
+            history.push("/home");
+          });
+        }
+
+    async function deleteTopic(topicName){
+        await axios({
+            method:"delete",
+            url:"https://3resyr4ypg.execute-api.us-east-1.amazonaws.com/PROD/chatting",
+            params:{'topicName':topicName}
+        }).then((response)=>{
+        }).catch((error)=>{
+            alert(error);
+            history.push("/home");
+        });
+    }
+
+    async function getRestaurantTopic(restaurantName)
+    {
+        await axios({
+            method:"get",
+            url:"https://3resyr4ypg.execute-api.us-east-1.amazonaws.com/PROD/chatting",
+            params:{'restaurantName':restaurantName}
+          }).then((response)=>{
+          }).catch((error)=>{
+            alert(error);
+            history.push("/home");
+          });
     }
 
     function getOffline(){
