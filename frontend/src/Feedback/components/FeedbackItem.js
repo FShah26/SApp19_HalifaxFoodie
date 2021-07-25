@@ -8,7 +8,7 @@ const FeedbackItem = (props) => {
   return (
     <div>
       {foodData.map((data, i) => (
-        <Card style={{ width: "18rem" }} key={i}>
+        <Card style={{ width: "18rem", height:"34rem",}} key={i}>
           <Card.Img variant="top" src={data.imgUrl} />
           <Card.Body>
             <Card.Title>{data.name}</Card.Title>

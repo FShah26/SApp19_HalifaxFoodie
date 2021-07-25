@@ -21,6 +21,7 @@ import MenuItem from "./Restaurant/pages/menuItem";
 import Chat from "./Restaurant/pages/Chat";
 import OrderFood from "./Pages/OrderFood";
 import FeedbackPage from "./Feedback/pages/FeedbackPage";
+import LexChatBot from "./Feedback/components/LexChatBot";
 
 const App = () => {
 
@@ -67,6 +68,7 @@ const App = () => {
         </Route>
         <Route exact path="/feedback/:id">
           <FeedbackPage/>
+          <LexChatBot />
         </Route>
       </Router>
     </React.Fragment>
