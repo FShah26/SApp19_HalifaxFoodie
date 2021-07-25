@@ -6,6 +6,7 @@ import MenuCard from "../Components/MenuCard";
 import axios from "axios";
 import { MENU_PATH } from "../Utils/Routes";
 import { ID_TOKEN } from "../Utils/AccountUtils";
+import WordCloud from "../Restaurant/components/WordCloud";
 
 
 const Restaurant = () => {
@@ -77,6 +78,10 @@ const Restaurant = () => {
                         <button type="button" className="btn btn-primary" onClick={orderFood} >Submit</button>
                     </div>
                 </form>
+            </div>
+            <div>
+              <h5>Below are reviews of our customers for the item you've selected</h5>
+              <WordCloud menuItemId={id} orderData={[]}/>
             </div>
         </div>
     );
