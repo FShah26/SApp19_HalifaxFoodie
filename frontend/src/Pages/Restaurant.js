@@ -15,7 +15,7 @@ const Restaurant = () => {
   const { id } = useParams();
   const [menuList, setMenuList] = useState([]);
   const idtoken = localStorage.getItem(ID_TOKEN);
-  const [restaurantId,setRestaurantId] = useState(id);
+  const [restaurantId, setRestaurantId] = useState(id);
 
 
 
