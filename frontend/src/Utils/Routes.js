@@ -3,3 +3,4 @@ export const BASE_URL =
 
 export const MFA_PATH = BASE_URL + "mfa";
 export const RESTAURANTS_PATH = BASE_URL + "restaurants";
+export const PUBSUB_BACKEND = "https://pubsubbackend-yndwiae6zq-uc.a.run.app";
