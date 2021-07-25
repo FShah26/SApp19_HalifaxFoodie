@@ -21,18 +21,24 @@ const Restaurant = () => {
         alert("Your order has been placed sucessfully. Your food will be delivered on your address soon.")
     };
 
-    async function saveAddedItem()
-  {
-    //setIsLoading(true);
+    useEffect(() => {
+      //saveAddedItem();
+        }, []);
+    
+  async function saveAddedItem() {
     //console.log(menuItem);
+
+    const headersPass = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'MyValue',
+      'Access-Control-Allow-Origin' : '*',
+      'Access-Control-Allow-Credentials': true,
+    }
+
     await axios({
       method:"post",
-      url:"https://5zi1castr4.execute-api.us-east-1.amazonaws.com/MyAPI/",
-      params:{'menuId':id},
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "myValue",
-      },
+      url:"https://5zi1castr4.execute-api.us-east-1.amazonaws.com/MyAPI",
+      headers: headersPass,
       data:{
         "id" : id,
         "name" : values.name,
@@ -40,10 +46,8 @@ const Restaurant = () => {
       }
     }).then((response)=>{
       alert(response.data.message);
-      //setIsLoading(false);
     }).catch((error)=>{
       alert(error);
-      //setIsLoading(false);
     });
   }
 

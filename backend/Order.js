@@ -1,4 +1,5 @@
 var SQL = require("mysql2");
+var CORS =  require("cors");
 
 const sqlCon = SQL.createConnection({
   host: "fooddelivery5410.cy8c8vgerfgo.us-east-1.rds.amazonaws.com",
