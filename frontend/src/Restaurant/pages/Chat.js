@@ -5,6 +5,7 @@ import { useHistory,useLocation } from "react-router-dom";
 import '../css/Chat.css';
 import axios from 'axios';
 import { USER_PROFILE } from '../../Utils/AccountUtils';
+import { PUBSUB_BACKEND } from '../../Utils/Routes';
 import { Spinner } from "react-bootstrap";
 
 const Chat = () => {
@@ -78,7 +79,7 @@ const Chat = () => {
     {
         setIsLoading(true);
         // console.log(restaurantName);      
-        var url = `http://www.localhost:3000/checkChatInitiation/${restaurantName}`;
+        var url = `${PUBSUB_BACKEND}/checkChatInitiation/${restaurantName}`;
         await axios({
             method:"get",
             url: url
@@ -111,7 +112,7 @@ const Chat = () => {
         let uname = (role === USER_PROFILE ? user.split('@')[0] : user);
         await axios({
             method:"post",
-            url:"http://www.localhost:3000/initiateChat",
+            url:`${PUBSUB_BACKEND}/initiateChat`,
             data:{
                 "user":uname,
                 "restaurant":restaurantName,
@@ -140,7 +141,7 @@ const Chat = () => {
     {
         await axios({
             method:"post",
-            url:"http://www.localhost:3000/pushMessage",
+            url:`${PUBSUB_BACKEND}/pushMessage`,
             data:{
                 "role":role,
                 "message":userMessage
@@ -158,7 +159,7 @@ const Chat = () => {
     {
         await axios({
             method:"get",
-            url:"http://www.localhost:3000/getMessage",
+            url:`${PUBSUB_BACKEND}/getMessage`,
             params:{
                 "role":role
             }
@@ -182,7 +183,7 @@ const Chat = () => {
         {
             await axios({
                 method:"delete",
-                url:"http://www.localhost:3000/disconnectChat"
+                url:`${PUBSUB_BACKEND}/disconnectChat`
             }).then((response)=>{
                 console.log("disconnectChat",response);
                 if(response.status)
