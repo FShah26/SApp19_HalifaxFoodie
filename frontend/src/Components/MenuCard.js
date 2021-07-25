@@ -14,7 +14,7 @@ const MenuCard = ({ name, imageURL, ingredients, price, id }) => {
   const history = useHistory();
 
   const cardClick = () => { 
-    history.push(`restaurant/${id}`);
+    history.push(`/orderFood/${id}`);
   };
 
   return (
