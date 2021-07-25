@@ -24,6 +24,10 @@ import Chat from "./Restaurant/pages/Chat";
 import OrderFood from "./Pages/OrderFood";
 import axios from 'axios';
 import WordCloud from "./Restaurant/components/WordCloud";
+import FeedbackPage from "./Feedback/pages/FeedbackPage";
+import LexChatBot from "./Feedback/components/LexChatBot";
+import Feedback from "./Feedback/pages/Feedback";
+
 const App = () => {
 
   
@@ -99,6 +103,14 @@ const App = () => {
         </Route>
         <Route exact path="/wordcloud/:menuItemId">
           <WordCloud />
+        </Route>
+        <Route exact path="/feedback/:id">
+          <FeedbackPage/>
+          <LexChatBot />
+        </Route>
+        <Route exact path="/food/feedback/">
+          <Feedback/>
+          <LexChatBot />
         </Route>
       </Router>
     </React.Fragment>
