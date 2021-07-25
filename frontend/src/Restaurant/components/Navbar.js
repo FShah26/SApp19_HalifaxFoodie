@@ -20,6 +20,7 @@ function AppNavBar({restaurantDetails}) {
     if (isUserThere) {
       localStorage.removeItem(EMAIL_KEY);
       localStorage.removeItem(MFA_KEY);
+      localStorage.removeItem(PROFILE_KEY);
       isUserThere.signOut();
       history.push("login");
     }
@@ -39,6 +40,10 @@ function AppNavBar({restaurantDetails}) {
     <div className="App">
       <Navbar collapseOnSelect expand="lg" bg="dark"  variant="dark">
             <Navbar.Brand href="/restaurantHome">
+            {/* <Navbar.Brand as={Link} to={{
+                      pathname:"/restaurantHome",
+                      prop:{restaurantDetails:restaurantDetails},
+                    }}>  */}
                 {/* <img src={logo} className="d-inline-block align-top" height="150"/> */}
                 {restaurantDetails.resname} <sub>HalifaxFoodie</sub>
             </Navbar.Brand>

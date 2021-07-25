@@ -4,7 +4,7 @@ import ReactWordcloud from 'react-wordcloud';
 import { useParams } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 
-const WordCloud = ({menuItemId}) => {
+const WordCloud = ({menuItemId,orderData}) => {
 
   // const { menuItemId} = useParams();
   const [words,setWords] = useState([]);
@@ -12,8 +12,18 @@ const WordCloud = ({menuItemId}) => {
 
 
   useEffect(()=>{
-    console.log(menuItemId);
-    getFeedbacks(menuItemId);
+    // console.log(menuItemId);
+    if(menuItemId > 0)
+    {
+      getFeedbacks(menuItemId);
+    }
+    if(orderData.length > 0)
+    {
+      console.log("InWordCloud",orderData);
+      setWords(orderData);
+      setIsLoading(false);
+    }
+    
   },[]);
 
 
@@ -28,7 +38,7 @@ const WordCloud = ({menuItemId}) => {
     rotations: 1,
     rotationAngles: [0],
     enableTooltip: true,
-    fontSizes: [30, 60],
+    fontSizes: [20, 50],
     fontFamily: "impact",
     fontStyle: "normal",
     fontWeight: "normal",
@@ -37,7 +47,12 @@ const WordCloud = ({menuItemId}) => {
     transitionDuration: 1000
     
   };
-  const size = [500, 300];
+  let size = [500,300];
+  if(orderData.length>0)
+  {
+    size = [700, 500];
+  }
+  
 
 
 async function getFeedbacks(menuItemId)
@@ -56,9 +71,6 @@ async function getFeedbacks(menuItemId)
             setIsLoading(false);
           });
     }
-
-
-    
     return(
       isLoading ?
       <Spinner animation="border" size="lg" style={{display:'flex',justifyContent:'flex-center', visibility:(isLoading ? "visibile" : "collapse") }} /> 

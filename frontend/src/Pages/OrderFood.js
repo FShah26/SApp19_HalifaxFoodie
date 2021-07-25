@@ -77,7 +77,7 @@ const Restaurant = () => {
             </div>
             <div>
               <h5>Below are reviews of our customers for the item you've selected</h5>
-              <WordCloud menuItemId={id}/>
+              <WordCloud menuItemId={id} orderData={[]}/>
             </div>
         </div>
     );

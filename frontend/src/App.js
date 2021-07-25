@@ -97,9 +97,6 @@ const App = () => {
         <Route exact path="/chat">
           <Chat role={profile}/>
         </Route>
-        <Route exact path="/wordcloud/:menuItemId">
-          <WordCloud />
-        </Route>
       </Router>
     </React.Fragment>
   );
