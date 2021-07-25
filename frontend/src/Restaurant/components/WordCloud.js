@@ -2,11 +2,13 @@ import React,{useEffect,useState} from 'react';
 import axios from 'axios';
 import ReactWordcloud from 'react-wordcloud';
 import { useParams } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 
-const WordCloud = () => {
+const WordCloud = ({menuItemId}) => {
 
-  const { menuItemId} = useParams();
+  // const { menuItemId} = useParams();
   const [words,setWords] = useState([]);
+  const [isLoading,setIsLoading] = useState(true);
 
 
   useEffect(()=>{
@@ -16,16 +18,26 @@ const WordCloud = () => {
 
 
   const callbacks = {
-    getWordColor: word => word.value > 50 ? "blue" : "red",
-    onWordClick: console.log,
-    onWordMouseOver: console.log,
-    getWordTooltip: word => `${word.text} (${word.value}) [${word.value > 50 ? "good" : "bad"}]`,
+    // getWordColor: word => word.value > 15 ? "green" : "red",
+    // onWordClick: console.log,
+    // onWordMouseOver: console.log,
+    // getWordTooltip: word => `${word.text} (${word.value})`,
   }
   const options = {
-    rotations: 2,
-    rotationAngles: [-90, 0],
+    colors: ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"],
+    rotations: 1,
+    rotationAngles: [0],
+    enableTooltip: true,
+    fontSizes: [30, 60],
+    fontFamily: "impact",
+    fontStyle: "normal",
+    fontWeight: "normal",
+    padding: 1,
+    spiral: "archimedean",
+    transitionDuration: 1000
+    
   };
-  const size = [300, 200];
+  const size = [500, 300];
 
 
 async function getFeedbacks(menuItemId)
@@ -37,14 +49,20 @@ async function getFeedbacks(menuItemId)
           }).then((response)=>{
             console.log(response.data.data);
             setWords(response.data.data);
+            setIsLoading(false);
           }).catch((error)=>{
             alert(error);
             // history.push("/home");
+            setIsLoading(false);
           });
     }
 
 
+    
     return(
+      isLoading ?
+      <Spinner animation="border" size="lg" style={{display:'flex',justifyContent:'flex-center', visibility:(isLoading ? "visibile" : "collapse") }} /> 
+      :
       <ReactWordcloud 
       callbacks={callbacks}
       options={options}
