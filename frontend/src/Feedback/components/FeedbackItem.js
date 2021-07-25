@@ -18,7 +18,7 @@ const FeedbackItem = (props) => {
               variant="primary"
               onClick={() => {
                 props.history.push({
-                  pathname: "/feedback",
+                  pathname: "/food/feedback",
                   restaurantId: props.restaurantId,
                   menuItemId: data.Id,
                   foodItem: data.name
