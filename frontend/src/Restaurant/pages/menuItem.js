@@ -67,7 +67,7 @@ const MenuItem = (props,{restaurantDetails}) => {
     });
   }
 
-  function saveMenuItem() {
+  async function saveMenuItem() {
     if(isEdit)
     {
       await saveEditedItem();
