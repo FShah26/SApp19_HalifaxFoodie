@@ -27,6 +27,7 @@ import WordCloud from "./Restaurant/components/WordCloud";
 import FeedbackPage from "./Feedback/pages/FeedbackPage";
 import LexChatBot from "./Feedback/components/LexChatBot";
 import Feedback from "./Feedback/pages/Feedback";
+import OrderHistory from "./Feedback/pages/OrderHistory";
 
 const App = () => {
 
@@ -111,6 +112,9 @@ const App = () => {
         <Route exact path="/food/feedback/">
           <Feedback/>
           <LexChatBot />
+        </Route>
+        <Route exact path="/orderHistory">
+          <OrderHistory />
         </Route>
       </Router>
     </React.Fragment>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, withRouter } from "react-router-dom";
 import styled from "styled-components";
-import { Container, Col, Row, Spinner } from "react-bootstrap";
+import { Container, Col, Row, Spinner,Button } from "react-bootstrap";
 import MenuCard from "../Components/MenuCard";
 import axios from "axios";
 import { MENU_PATH } from "../Utils/Routes";
@@ -11,7 +11,7 @@ const MenuListingContainer = styled(Container)`
   margin-top: 50px;
 `;
 
-const Restaurant = () => {
+const Restaurant = (props) => {
   const { id } = useParams();
   const [menuList, setMenuList] = useState([]);
   const idtoken = localStorage.getItem(ID_TOKEN);
@@ -41,6 +41,12 @@ const Restaurant = () => {
 
   return menuList.length > 0 ? (
     <MenuListingContainer>
+      <Button variant="primary" onClick = {() => {
+                props.history.push({
+                    pathname : '/feedback/1',
+                });
+
+            }}>Feedback</Button>
       <Row md={4} sm={2} xs={1}>
         {menuList.map((menuItem) => (
           <Col>
@@ -63,4 +69,4 @@ const Restaurant = () => {
   //return <div>RestaurantID: {id}</div>;
 };
 
-export default Restaurant;
+export default withRouter(Restaurant);

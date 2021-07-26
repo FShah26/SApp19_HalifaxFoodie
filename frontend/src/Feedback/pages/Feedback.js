@@ -41,7 +41,7 @@ const Feedback = (props) => {
           // console.log(response.data);
           if (response.data.success) {
             props.history.push({
-              pathname: "/",
+              pathname: "/restaurant/1",
             });
           } else {
             console.log("");
