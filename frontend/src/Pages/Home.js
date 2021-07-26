@@ -63,6 +63,13 @@ const Home = () => {
     }
   };
 
+  const visualization = () => {
+    const isUserThere = UserPool.getCurrentUser();
+    if (isUserThere) {
+      history.push("visualization");
+    }
+  };
+
   return (
     <>
       {profile === USER_PROFILE ? (
@@ -71,6 +78,11 @@ const Home = () => {
           <Col xs="8" md="10">
             <h1 className="text-muted"> Home </h1>
           </Col>
+          <Col xs="6" md="2">
+            <Button variant="danger" onClick={visualization}>
+              Visualization
+            </Button>
+          </Col> 
           <Col xs="4" md="2">
             <Button variant="danger" onClick={logOut}>
               Log Out
