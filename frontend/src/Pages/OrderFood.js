@@ -29,19 +29,16 @@ const Restaurant = () => {
   async function saveAddedItem() {
     //console.log(menuItem);
 
-    const headersPass = {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'MyValue',
-      'Access-Control-Allow-Origin' : '*',
-      'Access-Control-Allow-Credentials': true,
-    }
+    // const headersPass = {
+    //   'Content-Type': 'application/x-www-form-urlencoded',
+    //   'Authorization': 'MyValue'
+    // }
 
     await axios({
       method:"post",
       url:"https://5zi1castr4.execute-api.us-east-1.amazonaws.com/MyAPI",
-      headers: headersPass,
       data:{
-        "id" : id,
+        "id" : parseInt(id),
         "name" : values.name,
         "address" : values.address,
         "email" : localStorage.getItem("email")
