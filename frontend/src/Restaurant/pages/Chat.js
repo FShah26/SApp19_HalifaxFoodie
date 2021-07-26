@@ -59,7 +59,7 @@ const Chat = () => {
                 //create a rest-user-publisher
                 //call the getAPI(PullMessage) of the user-rest-publisher in case of restaurant
                 pullMessage();
-              }, 10000)); 
+              }, 4000)); 
         }
         else
         {
