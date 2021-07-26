@@ -25,6 +25,11 @@ import OrderFood from "./Pages/OrderFood";
 import Visualization from "./Pages/Visualization";
 import axios from 'axios';
 import WordCloud from "./Restaurant/components/WordCloud";
+import FeedbackPage from "./Feedback/pages/FeedbackPage";
+import LexChatBot from "./Feedback/components/LexChatBot";
+import Feedback from "./Feedback/pages/Feedback";
+import OrderHistory from "./Feedback/pages/OrderHistory";
+
 const App = () => {
 
   
@@ -100,6 +105,17 @@ const App = () => {
         </Route>
         <Route exact path="/chat">
           <Chat role={profile}/>
+        </Route>
+        <Route exact path="/feedback/:id">
+          <FeedbackPage/>
+          <LexChatBot />
+        </Route>
+        <Route exact path="/food/feedback/">
+          <Feedback/>
+          <LexChatBot />
+        </Route>
+        <Route exact path="/orderHistory">
+          <OrderHistory />
         </Route>
       </Router>
     </React.Fragment>
