@@ -70,12 +70,12 @@ const MenuItem = (props,{restaurantDetails}) => {
   function saveMenuItem() {
     if(isEdit)
     {
-      saveEditedItem();
+      await saveEditedItem();
       history.push("/restaurantHome")
     }
     else
     {
-      saveAddedItem();
+      await saveAddedItem();
       history.push("/restaurantHome");
     }
         
