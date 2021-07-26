@@ -22,6 +22,7 @@ import Restaurant from "./Pages/Restaurant";
 import MenuItem from "./Restaurant/pages/menuItem";
 import Chat from "./Restaurant/pages/Chat";
 import OrderFood from "./Pages/OrderFood";
+import Visualization from "./Pages/Visualization";
 import axios from 'axios';
 import WordCloud from "./Restaurant/components/WordCloud";
 const App = () => {
@@ -93,6 +94,9 @@ const App = () => {
         </Route>
         <Route exact path="/menuItem/:id">
           <MenuItem restaurantDetails={restaurantDetails}/>
+        </Route>
+        <Route exact path="/visualization">
+          <Visualization />
         </Route>
         <Route exact path="/chat">
           <Chat role={profile}/>

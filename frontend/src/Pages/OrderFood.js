@@ -5,8 +5,7 @@ import { Container, Col, Row, Spinner } from "react-bootstrap";
 import MenuCard from "../Components/MenuCard";
 import axios from "axios";
 import { MENU_PATH } from "../Utils/Routes";
-import { ID_TOKEN } from "../Utils/AccountUtils";
-
+import { EMAIL_KEY, ID_TOKEN } from "../Utils/AccountUtils";
 
 const Restaurant = () => {
     const { id } = useParams();
@@ -42,7 +41,8 @@ const Restaurant = () => {
       data:{
         "id" : id,
         "name" : values.name,
-        "address" : values.address 
+        "address" : values.address,
+        "email" : localStorage.getItem("email")
       }
     }).then((response)=>{
       alert(response.data.message);
