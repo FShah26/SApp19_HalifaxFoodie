@@ -29,6 +29,7 @@ import FeedbackPage from "./Feedback/pages/FeedbackPage";
 import LexChatBot from "./Feedback/components/LexChatBot";
 import Feedback from "./Feedback/pages/Feedback";
 import OrderHistory from "./Feedback/pages/OrderHistory";
+import SimilarityScore from "./Feedback/pages/SimilarityScore";
 
 const App = () => {
 
@@ -116,6 +117,9 @@ const App = () => {
         </Route>
         <Route exact path="/orderHistory">
           <OrderHistory />
+        </Route>
+        <Route exact path="/similarity">
+          <SimilarityScore />
         </Route>
       </Router>
     </React.Fragment>
